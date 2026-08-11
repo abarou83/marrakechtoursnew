@@ -1,0 +1,29 @@
+# MarrakechTours — marrakechtours.net
+
+> Excursions et tours depuis Marrakech : désert du Sahara, Atlas, Essaouira, expériences culturelles.
+
+## Pages principales
+
+- Accueil: /
+- Tours: /tours
+- Guides voyage: /guide
+- Blog: /blog
+- Contact: /contact
+- Cartes cadeaux: /cartes-cadeaux
+
+## Langues
+
+- Français (fr)
+- English (en)
+- Español (es)
+- العربية (ar)
+
+## Réservation
+
+Les réservations se font via le wizard 5 étapes sur chaque page tour.
+Paiement: Stripe, PayPal (si configuré).
+
+## Contact
+
+Site: https://marrakechtours.net
+Email: contact@marrakechtours.net

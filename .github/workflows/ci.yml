@@ -1,0 +1,72 @@
+name: CI
+
+on:
+  push:
+    branches: [main, develop, staging]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  tests:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: marrakechtours_test
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+          extensions: mbstring, pdo_mysql, bcmath, gd, zip, intl
+          coverage: none
+
+      - name: Install Composer dependencies
+        run: composer install --prefer-dist --no-progress
+
+      - name: Copy environment
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Configure test database
+        run: |
+          php -r "file_put_contents('.env', preg_replace('/DB_CONNECTION=.*/m', 'DB_CONNECTION=mysql', file_get_contents('.env')));"
+          php -r "file_put_contents('.env', preg_replace('/DB_DATABASE=.*/m', 'DB_DATABASE=marrakechtours_test', file_get_contents('.env')));"
+          php -r "file_put_contents('.env', preg_replace('/DB_USERNAME=.*/m', 'DB_USERNAME=root', file_get_contents('.env')));"
+          php -r "file_put_contents('.env', preg_replace('/DB_PASSWORD=.*/m', 'DB_PASSWORD=root', file_get_contents('.env')));"
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
+      - name: Run tests
+        run: vendor/bin/pest
+
+  deploy-staging:
+    needs: tests
+    if: github.ref == 'refs/heads/staging' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Deploy to o2switch staging
+        env:
+          DEPLOY_HOST: ${{ secrets.O2SWITCH_STAGING_HOST }}
+          DEPLOY_USER: ${{ secrets.O2SWITCH_DEPLOY_USER }}
+          DEPLOY_KEY: ${{ secrets.O2SWITCH_DEPLOY_KEY }}
+          DEPLOY_PATH: ${{ secrets.O2SWITCH_STAGING_PATH }}
+        run: |
+          echo "Configure secrets O2SWITCH_* pour déploiement SSH/rsync automatique."
+          echo "En attendant, déploiement manuel via cPanel Git + .cpanel.yml"

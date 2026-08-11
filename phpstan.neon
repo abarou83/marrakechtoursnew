@@ -1,0 +1,24 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    level: 6
+
+    paths:
+        - app
+
+    excludePaths:
+        - app/Http/Middleware/TrustHosts.php
+
+    checkMissingIterableValueType: false
+
+    ignoreErrors:
+        - '#PHPDoc tag @var#'
+
+    reportUnmatchedIgnoredErrors: false
+
+    tmpDir: storage/phpstan
+
+    earlyTerminatingMethodCalls:
+        Illuminate\Http\RedirectResponse:
+            - send

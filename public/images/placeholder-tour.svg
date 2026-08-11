@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600" role="img" aria-label="Image tour indisponible">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5f0e8"/>
+      <stop offset="100%" stop-color="#e8dfd1"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#bg)"/>
+  <g fill="none" stroke="#c4b5a5" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="260" y="170" width="280" height="200" rx="12"/>
+    <path d="M290 320l70-80 55 60 45-50 70 70"/>
+    <circle cx="500" cy="230" r="22"/>
+  </g>
+  <text x="400" y="430" text-anchor="middle" fill="#8b7355" font-family="system-ui,sans-serif" font-size="22" font-weight="600">Marrakech Tours</text>
+</svg>
