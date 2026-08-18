@@ -4,7 +4,7 @@
 # 2. Remplacez le chemin si votre dépôt n'est pas dans ~/marrakechtours
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/USER/marrakechtours
+    - export DEPLOYPATH=/home/sc2elab4512/marrakechtours
     - cd $DEPLOYPATH
     - composer install --no-dev --optimize-autoloader --no-interaction
     - npm ci --omit=dev 2>/dev/null || npm install --omit=dev
