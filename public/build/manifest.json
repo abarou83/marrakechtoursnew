@@ -1,0 +1,53 @@
+{
+  "_recently-viewed-BCuVeChi.js": {
+    "file": "assets/recently-viewed-BCuVeChi.js",
+    "name": "recently-viewed"
+  },
+  "_tour-page-config-Di9ZU8r_.js": {
+    "file": "assets/tour-page-config-Di9ZU8r_.js",
+    "name": "tour-page-config"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-Bi7RCgA5.css",
+    "src": "resources/css/app.css",
+    "isEntry": true,
+    "name": "app",
+    "names": [
+      "app.css"
+    ]
+  },
+  "resources/js/admin.js": {
+    "file": "assets/admin-CzI1vhkK.js",
+    "name": "admin",
+    "src": "resources/js/admin.js",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-Owzl2zYb.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true,
+    "imports": [
+      "_recently-viewed-BCuVeChi.js"
+    ]
+  },
+  "resources/js/tour-booking-form-simple.js": {
+    "file": "assets/tour-booking-form-simple-CGcqDOqL.js",
+    "name": "tour-booking-form-simple",
+    "src": "resources/js/tour-booking-form-simple.js",
+    "isEntry": true,
+    "imports": [
+      "_tour-page-config-Di9ZU8r_.js"
+    ]
+  },
+  "resources/js/tour-page.js": {
+    "file": "assets/tour-page-CPVbncc8.js",
+    "name": "tour-page",
+    "src": "resources/js/tour-page.js",
+    "isEntry": true,
+    "imports": [
+      "_recently-viewed-BCuVeChi.js",
+      "_tour-page-config-Di9ZU8r_.js"
+    ]
+  }
+}

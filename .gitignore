@@ -1,6 +1,7 @@
 /.phpunit.cache
 /node_modules
-/public/build
+# public/build versionné pour déploiement o2switch (npm indisponible au deploy cPanel)
+# /public/build
 /public/hot
 /public/storage
 /storage/*.key

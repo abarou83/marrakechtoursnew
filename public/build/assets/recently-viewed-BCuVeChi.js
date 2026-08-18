@@ -1,0 +1,1 @@
+function l(t){const i="recently_viewed_tours";let e=[];try{e=JSON.parse(localStorage.getItem(i))||[]}catch{e=[]}e=e.filter(c=>c.id!==t.id),e.unshift({id:t.id,title:t.title,image:t.image,price:t.price,url:t.url,viewedAt:new Date().toISOString()}),e=e.slice(0,10),localStorage.setItem(i,JSON.stringify(e))}window.trackRecentlyViewed=l;export{l as t};
