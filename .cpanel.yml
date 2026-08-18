@@ -1,10 +1,10 @@
 ---
 # Déploiement automatique cPanel / o2switch (Git Version Control)
 # 1. Remplacez USER par votre identifiant cPanel (ex. labc1234)
-# 2. Remplacez le chemin si votre dépôt n'est pas dans ~/marrakechtours
+# 2. Remplacez le chemin si votre dépôt n'est pas dans ~/public_html/marrakechtours
 deployment:
   tasks:
-    - export DEPLOYPATH=/home/sc2elab4512/marrakechtours
+    - export DEPLOYPATH=/home/sc2elab4512/public_html/marrakechtours
     - cd $DEPLOYPATH
     - composer install --no-dev --optimize-autoloader --no-interaction
     - npm ci --omit=dev 2>/dev/null || npm install --omit=dev
