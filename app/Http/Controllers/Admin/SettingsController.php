@@ -108,7 +108,8 @@ class SettingsController extends Controller
         // Handle SEO settings (multilingual)
         $availableLocales = \App\Models\Language::active()->pluck('code')->toArray();
         $seoFields = ['seo_home_title', 'seo_home_description', 'seo_home_keywords'];
-        
+        $defaultLocale = config('app.locale', 'fr');
+
         foreach ($seoFields as $field) {
             // Handle multilingual fields
             foreach ($availableLocales as $locale) {
@@ -117,8 +118,11 @@ class SettingsController extends Controller
                     SiteSetting::set($localeField, $request->$localeField, 'seo');
                 }
             }
-            // Keep backward compatibility with non-localized fields
-            if ($request->filled($field)) {
+            // Sync clé générique avec la locale par défaut (rétrocompatibilité)
+            $defaultField = $field . '_' . $defaultLocale;
+            if ($request->filled($defaultField)) {
+                SiteSetting::set($field, $request->$defaultField, 'seo');
+            } elseif ($request->filled($field)) {
                 SiteSetting::set($field, $request->$field, 'seo');
             }
         }

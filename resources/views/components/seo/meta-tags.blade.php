@@ -10,12 +10,22 @@
 @php
     // Détecter si on est sur la page d'accueil
     $isHomePage = request()->routeIs('home') || request()->path() === '/';
-    
-    // Valeurs par défaut depuis les paramètres du site
+    $locale = app()->getLocale();
+
+    // Valeurs par défaut depuis les paramètres du site (clés multilingues admin → seo_home_title_fr, etc.)
     if ($isHomePage) {
-        $seoTitle = $title ?? site_setting('seo_home_title', config('app.name', 'Tourify') . ' - Découvrez nos tours et excursions');
-        $seoDescription = $description ?? site_setting('seo_home_description', 'Découvrez nos tours et excursions uniques. Réservez votre prochaine aventure avec nous et créez des souvenirs inoubliables.');
-        $seoKeywords = $keywords ?? site_setting('seo_home_keywords', 'tours, excursions, voyages, aventures, réservation');
+        $seoTitle = $title ?? site_setting(
+            'seo_home_title_' . $locale,
+            site_setting('seo_home_title', config('app.name', 'Tourify') . ' - Découvrez nos tours et excursions')
+        );
+        $seoDescription = $description ?? site_setting(
+            'seo_home_description_' . $locale,
+            site_setting('seo_home_description', 'Découvrez nos tours et excursions uniques. Réservez votre prochaine aventure avec nous et créez des souvenirs inoubliables.')
+        );
+        $seoKeywords = $keywords ?? site_setting(
+            'seo_home_keywords_' . $locale,
+            site_setting('seo_home_keywords', 'tours, excursions, voyages, aventures, réservation')
+        );
         $seoOgImage = $ogImage ?? (site_setting('seo_home_og_image') ? Storage::url(site_setting('seo_home_og_image')) : asset('images/og-default.jpg'));
     } else {
         $seoTitle = $title ?? config('app.name', 'Tourify');
@@ -55,8 +65,8 @@
 
 {{-- Additional SEO Tags --}}
 <meta name="author" content="{{ site_setting('company_name', config('app.name', 'Tourify')) }}">
-<meta name="language" content="fr">
-<meta http-equiv="content-language" content="fr">
+<meta name="language" content="{{ str_replace('_', '-', $locale) }}">
+<meta http-equiv="content-language" content="{{ str_replace('_', '-', $locale) }}">
 
 
 
