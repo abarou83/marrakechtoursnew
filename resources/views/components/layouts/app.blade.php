@@ -43,7 +43,7 @@
         {{ $footer }}
     @endif
 
-    @livewireScripts
+    @livewireScripts(isset($cspNonce) ? ['nonce' => $cspNonce] : [])
 
     @stack('scripts')
 </body>

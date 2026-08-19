@@ -69,7 +69,3 @@
     </div>
 </div>
 @endsection
-
-@push('scripts')
-@livewireScripts
-@endpush
